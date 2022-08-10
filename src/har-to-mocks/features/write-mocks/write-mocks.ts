@@ -20,8 +20,12 @@ export const writeMocks = (targetPath: string, data: Entry[], log: Logger, optio
   } else {
     cli.action.start('\nwriting files');
     newFiles.forEach(({ filePath, fileName, fileData }) => {
+      let targetPath = path.join(filePath, fileName);
       ensureDirSync(filePath);
-      writeFileSync(path.join(filePath, fileName), fileData);
+      if (!fileData) {
+        log(`\n ${targetPath} no data to write`);
+      }
+      writeFileSync(targetPath, fileData || '');
     });
     cli.action.stop();
   }
