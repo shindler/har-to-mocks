@@ -22,11 +22,11 @@ export class HarToMocksProcess {
     }
 
     if (resourceType) {
-      filtred = filtred.filter((e) => e._resourceType === resourceType);
+      filtred = filtred.filter((e) => resourceType.some((rt) => rt === e._resourceType));
     }
 
     if (method) {
-      filtred = filtred.filter((e) => e.request.method === method);
+      filtred = filtred.filter((e) => method.some((m) => m === e.request.method));
     }
 
     // Log table with content
